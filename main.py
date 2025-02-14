@@ -4,6 +4,10 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from web3 import Web3
 
+
+print("RPC_URL:", os.getenv("RPC_URL"))
+print("TOKEN_ADDRESS:", os.getenv("TOKEN_ADDRESS"))
+
 # Load environment variables
 RPC_URL = os.getenv("RPC_URL", "https://bsc-dataseed.binance.org/")
 PRIVATE_KEY = os.getenv("PRIVATE_KEY")  # Wallet private key (keep secure!)
