@@ -4,8 +4,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from web3 import Web3
 
-
-print("RPC_URL:", os.getenv("RPC_URL"))
+print("Available environment variables:", os.environ)  # Print all available env variables
+print("PRIVATE_KEY:", os.getenv("PRIVATE_KEY"))
 print("TOKEN_ADDRESS:", os.getenv("TOKEN_ADDRESS"))
 
 # Load environment variables
