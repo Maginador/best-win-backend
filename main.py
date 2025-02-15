@@ -95,17 +95,19 @@ async def send_tokens(data: TransferRequest):
         # Sign transaction
         logger.info("Signing transaction...")
         signed_txn = w3.eth.account.sign_transaction(txn, PRIVATE_KEY)
-        logger.info("Transaction signed successfully.")
+        logger.info(f"Signed transaction: {signed_txn}")
+        logger.info(f"Signed transaction type: {type(signed_txn)}")
+        logger.info(f"Signed transaction attributes: {dir(signed_txn)}")
 
         # Send transaction
         logger.info("Sending transaction...")
-        tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+        tx_hash = w3.eth.send_raw_transaction(signed_txn.raw_transaction)
         logger.info(f"Transaction sent successfully, hash: {tx_hash.hex()}")
         return {"status": "success", "tx_hash": tx_hash.hex()}
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
         raise HTTPException(status_code=500, detail="Internal server error.")
-
+    
 @app.get("/")
 async def root():
     logger.info("Root endpoint hit.")
@@ -130,3 +132,5 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))  # Use Railway's PORT or default to 8000
     uvicorn.run(app, host="0.0.0.0", port=port)
+
+    
