@@ -111,6 +111,10 @@ async def root():
     logger.info("Root endpoint hit.")
     return {"message": "BSC Token Transfer API is running!"}
 
+@app.get("/ping")
+async def ping():
+    return {"message": "pong"}
+
 @app.get("/health")
 async def health_check():
     try:
